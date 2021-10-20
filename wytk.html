@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>无影坦克</title>
+  </head>
+  <body>
+    <style>
+      summary{
+        font-size:1.25rem;
+      }
+    </style>
+    <div style="padding:0 1rem">
+      <h1>无影坦克</h1>
+      <h3>新版网页程序</h3>
+      <details>
+        <summary>制作</summary>
+        <span>选择表图</span>
+        <input type="file" accept="image/*" multiple="" id="ipt" />
+        <br />
+        <span>选择里图</span>
+        <input type="file" multiple="" id="ipt1" />
+        <br />
+        <span>隐写位数</span>
+        <select id="bit">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected="">4</option>
+          <option value="5">5</option>
+          <option value="6">6(不推荐)</option>
+          <option value="7">7(不推荐)</option>
+        </select>
+        <br />
+        <span>图片备注</span>
+        <input type="text" id="text" value="TK" />
+        <br />
+        <button id="make">生成图片</button>
+        <span id="info1"></span>
+        <div id="display1"></div>
+      </details>
+      <details>
+        <summary>查看</summary>
+        <div id="info2"></div>
+        <input type="file" accept="image/*" multiple="" id="ipt2" />
+        <div id="display2"></div>
+      </details>
+      <div>&ensp;</div>
+       <div>
+
+        这是一个用来方便地在社交平台上传输文件的程序，原理是lsb隐写。<br /><span style="color:#ff4d00">使用此程序的"查看"功能所获得的文件，其来源均是此程序的其他使用者，与此程序本身没有任何关系。<br />此程序的本意是为社交平台用户提供便利，请勿用此程序进行非法行为，否则作者概不负责。</span>
+
+      </div>
+    </div>
+    <script>
+      //wytk
+      let worker1src=URL.createObjectURL(new Blob([atob("bGV0IGNoYW5nZWJpdD0oYSxiLG1vZGUpPT57CiAgbGV0IGFlbmQ9KC0xKTw8bW9kZQogIGxldCBhMT1hJih+YWVuZCkKICBsZXQgbTI9MTw8KG1vZGUtMSkKICBpZigyNTUtYTw9bTIgfHwgYTxtMil7CiAgICByZXR1cm4gYSZhZW5kfGIKICB9ZWxzZSBpZihiLWExPm0yKXsKICAgIHJldHVybiAoKChhPj4+bW9kZSktMSk8PG1vZGUpfGIKICB9ZWxzZSBpZihhMS1iPj1tMil7CiAgICByZXR1cm4gKCgoYT4+Pm1vZGUpKzEpPDxtb2RlKXxiCiAgfWVsc2V7CiAgICByZXR1cm4gYSZhZW5kfGIKICB9Cn0Kb25tZXNzYWdlPWU9PnsKICBsZXQgbW9kZT1lLmRhdGEubW9kZQogIGxldCBhcnIxPW5ldyBVaW50OEFycmF5KGUuZGF0YS5idWZmZXIxKQogIGxldCBhcnIyPW5ldyBVaW50OEFycmF5KGUuZGF0YS5idWZmZXIyKQogIAogIGxldCB0b3A9MTw8bW9kZQogIGxldCBjaGFuZ2VhcnI9bmV3IFVpbnQ4QXJyYXkodG9wPDw4KQogIGZvcihsZXQgdT0wO3U8MjU2O3UrKyl7CiAgICBmb3IobGV0IHY9MDt2PHRvcDt2KyspewogICAgICBjaGFuZ2VhcnJbdjw8OHx1XT1jaGFuZ2ViaXQodSx2LG1vZGUpCiAgICB9CiAgfQogIAogIGxldCBpPTAKICBsZXQgaj1lLmRhdGEub2Zmc2V0CiAgbGV0IGs9MAogIGxldCBrbGVuZ3RoPTAKICB3aGlsZShqPGFycjEubGVuZ3RoKXsKICAgIGlmKGk+PWFycjIubGVuZ3RoKXsKICAgICAgaT0wCiAgICB9CiAgICBrbGVuZ3RoKz04CiAgICBrPShrPDw4KXxhcnIyW2krK10KICAgIHdoaWxlKGtsZW5ndGg+PW1vZGUqMyl7CiAgICAgIGtsZW5ndGgtPW1vZGU7YXJyMVtqXT1jaGFuZ2VhcnJbaz4+PmtsZW5ndGg8PDh8YXJyMVtqXV07aisrIDtrJj1+KCgtMSk8PGtsZW5ndGgpOwogICAgICBrbGVuZ3RoLT1tb2RlO2FycjFbal09Y2hhbmdlYXJyW2s+Pj5rbGVuZ3RoPDw4fGFycjFbal1dO2orKyA7ayY9figoLTEpPDxrbGVuZ3RoKTsKICAgICAga2xlbmd0aC09bW9kZTthcnIxW2pdPWNoYW5nZWFycltrPj4+a2xlbmd0aDw8OHxhcnIxW2pdXTtqKz0yO2smPX4oKC0xKTw8a2xlbmd0aCk7CiAgICB9CiAgfQogIHBvc3RNZXNzYWdlKHtidWZmZXI6YXJyMS5idWZmZXJ9LFthcnIxLmJ1ZmZlcl0pCn0=")],{type:"text/javascript"}))
+      let worker2src=URL.createObjectURL(new Blob([atob("b25tZXNzYWdlPShlKT0+ewogIGlmKGUuZGF0YS5tb2RlPT00KXsKICAgIGNvbnN0IG9mZnNldD1lLmRhdGEub2Zmc2V0CiAgICBjb25zdCBhcnI9bmV3IFVpbnQ4QXJyYXkoZS5kYXRhLmJ1ZmZlcikKICAgIGNvbnN0IGxlbmd0aD1NYXRoLmNlaWwoKGFyci5sZW5ndGgtb2Zmc2V0KS8zMikqMTIKICAgIGNvbnN0IHJlc3VsdD1uZXcgVWludDhBcnJheShsZW5ndGgpCiAgICBsZXQgaT0wCiAgICBsZXQgaj1vZmZzZXQtMgogICAgd2hpbGUoaTxsZW5ndGgpewogICAgICByZXN1bHRbaSsrXT0oKGFycltqKz0yXSYxNSk8PDQpfChhcnJbais9MV0mMTUpCiAgICAgIHJlc3VsdFtpKytdPSgoYXJyW2orPTFdJjE1KTw8NCl8KGFycltqKz0yXSYxNSkKICAgICAgcmVzdWx0W2krK109KChhcnJbais9MV0mMTUpPDw0KXwoYXJyW2orPTFdJjE1KQogICAgfQogICAgcG9zdE1lc3NhZ2Uoe2J1ZmZlcjpyZXN1bHQuYnVmZmVyfSxbcmVzdWx0LmJ1ZmZlcl0pCiAgICByZXR1cm4KICB9ZWxzZSBpZihlLmRhdGEubW9kZT09Mil7CiAgICBjb25zdCBvZmZzZXQ9ZS5kYXRhLm9mZnNldAogICAgY29uc3QgYXJyPW5ldyBVaW50OEFycmF5KGUuZGF0YS5idWZmZXIpCiAgICBjb25zdCBsZW5ndGg9TWF0aC5jZWlsKChhcnIubGVuZ3RoLW9mZnNldCkvMzIpKjYKICAgIGNvbnN0IHJlc3VsdD1uZXcgVWludDhBcnJheShsZW5ndGgpCiAgICBsZXQgaT0wCiAgICBsZXQgaj1vZmZzZXQtMgogICAgd2hpbGUoaTxsZW5ndGgpewogICAgICByZXN1bHRbaSsrXT0KICAgICAgKChhcnJbais9Ml0mMyk8PDYpfAogICAgICAoKGFycltqKz0xXSYzKTw8NCl8CiAgICAgICgoYXJyW2orPTFdJjMpPDwyKXwKICAgICAgKCBhcnJbais9Ml0mMyk7CiAgICAgIHJlc3VsdFtpKytdPQogICAgICAoKGFycltqKz0xXSYzKTw8Nil8CiAgICAgICgoYXJyW2orPTFdJjMpPDw0KXwKICAgICAgKChhcnJbais9Ml0mMyk8PDIpfAogICAgICAoIGFycltqKz0xXSYzKTsKICAgICAgcmVzdWx0W2krK109CiAgICAgICgoYXJyW2orPTFdJjMpPDw2KXwKICAgICAgKChhcnJbais9Ml0mMyk8PDQpfAogICAgICAoKGFycltqKz0xXSYzKTw8Mil8CiAgICAgICggYXJyW2orPTFdJjMpOwogICAgfQogICAgcG9zdE1lc3NhZ2Uoe2J1ZmZlcjpyZXN1bHQuYnVmZmVyfSxbcmVzdWx0LmJ1ZmZlcl0pCiAgICByZXR1cm4KICB9ZWxzZSBpZihlLmRhdGEubW9kZT09MSl7CiAgICBjb25zdCBvZmZzZXQ9ZS5kYXRhLm9mZnNldAogICAgY29uc3QgYXJyPW5ldyBVaW50OEFycmF5KGUuZGF0YS5idWZmZXIpCiAgICBjb25zdCBsZW5ndGg9TWF0aC5jZWlsKChhcnIubGVuZ3RoLW9mZnNldCkvMzIpKjMKICAgIGNvbnN0IHJlc3VsdD1uZXcgVWludDhBcnJheShsZW5ndGgpCiAgICBsZXQgaT0wCiAgICBsZXQgaj1vZmZzZXQtMgogICAgd2hpbGUoaTxsZW5ndGgpewogICAgICByZXN1bHRbaSsrXT0KICAgICAgKChhcnJbais9Ml0mMSk8PDcpfAogICAgICAoKGFycltqKz0xXSYxKTw8Nil8CiAgICAgICgoYXJyW2orPTFdJjEpPDw1KXwKICAgICAgKChhcnJbais9Ml0mMSk8PDQpfAogICAgICAoKGFycltqKz0xXSYxKTw8Myl8CiAgICAgICgoYXJyW2orPTFdJjEpPDwyKXwKICAgICAgKChhcnJbais9Ml0mMSk8PDEpfAogICAgICAoIGFycltqKz0xXSYxKTsKICAgICAgcmVzdWx0W2krK109CiAgICAgICgoYXJyW2orPTFdJjEpPDw3KXwKICAgICAgKChhcnJbais9Ml0mMSk8PDYpfAogICAgICAoKGFycltqKz0xXSYxKTw8NSl8CiAgICAgICgoYXJyW2orPTFdJjEpPDw0KXwKICAgICAgKChhcnJbais9Ml0mMSk8PDMpfAogICAgICAoKGFycltqKz0xXSYxKTw8Mil8CiAgICAgICgoYXJyW2orPTFdJjEpPDwxKXwKICAgICAgKCBhcnJbais9Ml0mMSk7CiAgICAgIHJlc3VsdFtpKytdPQogICAgICAoKGFycltqKz0xXSYxKTw8Nyl8CiAgICAgICgoYXJyW2orPTFdJjEpPDw2KXwKICAgICAgKChhcnJbais9Ml0mMSk8PDUpfAogICAgICAoKGFycltqKz0xXSYxKTw8NCl8CiAgICAgICgoYXJyW2orPTFdJjEpPDwzKXwKICAgICAgKChhcnJbais9Ml0mMSk8PDIpfAogICAgICAoKGFycltqKz0xXSYxKTw8MSl8CiAgICAgICggYXJyW2orPTFdJjEpOwogICAgfQogICAgcG9zdE1lc3NhZ2Uoe2J1ZmZlcjpyZXN1bHQuYnVmZmVyfSxbcmVzdWx0LmJ1ZmZlcl0pCiAgICByZXR1cm4KICB9ZWxzZXsKICAgIGNvbnN0IG1vZGU9ZS5kYXRhLm1vZGUKICAgIGNvbnN0IGVuZD0oLTEpPj4+KDMyLW1vZGUpCiAgICBjb25zdCBvZmZzZXQ9ZS5kYXRhLm9mZnNldAogICAgY29uc3QgYXJyPW5ldyBVaW50OEFycmF5KGUuZGF0YS5idWZmZXIpCiAgICBjb25zdCBsZW5ndGg9TWF0aC5jZWlsKChhcnIubGVuZ3RoLW9mZnNldCkvMzIpKjMqbW9kZQogICAgY29uc3QgcmVzdWx0PW5ldyBVaW50OEFycmF5KGxlbmd0aCkKICAgIGxldCBpPTAKICAgIGxldCBqPW9mZnNldC0yCiAgICBsZXQgaz0wCiAgICBsZXQga2xlbmd0aD0wCiAgICB3aGlsZShpPGxlbmd0aCl7CiAgICAgIGtsZW5ndGgrPTMqbW9kZQogICAgICBrPShrPDwobW9kZSozKSl8CiAgICAgICgoYXJyW2orPTJdJmVuZCk8PChtb2RlKjIpKXwKICAgICAgKChhcnJbais9MV0mZW5kKTw8bW9kZSl8CiAgICAgIChhcnJbais9MV0mZW5kKTsKICAgICAgd2hpbGUoa2xlbmd0aD49OCl7CiAgICAgICAga2xlbmd0aCs9LTgKICAgICAgICByZXN1bHRbaSsrXT1rPj4+a2xlbmd0aAogICAgICAgIGs9KGtsZW5ndGg9PTApPzA6KChrPDwoMzIta2xlbmd0aCkpPj4+KDMyLWtsZW5ndGgpKQogICAgICB9CiAgICB9CiAgICBwb3N0TWVzc2FnZSh7YnVmZmVyOnJlc3VsdC5idWZmZXJ9LFtyZXN1bHQuYnVmZmVyXSkKICAgIHJldHVybgogIH0KfQ==")],{type:"text/javascript"}))
+      //回调获得Blob
+      let entank=(obj,returnfunc)=>{
+        let img=obj.img
+        let arr=obj.arr
+        let mode=obj.mode
+        let text=obj.text
+        //let metapix=[0,3,mode]
+        let pix=arr.length*8/3/mode+1
+        let scale=Math.sqrt(pix/img.width/img.height)
+        let width=Math.ceil(img.width*scale)
+        let height=Math.ceil(img.height*scale)
+        
+        let cvs=document.createElement("canvas")
+        let ctx=cvs.getContext("2d")
+        cvs.width=width
+        cvs.height=height
+        ctx.fillStyle="#FFF"
+        ctx.fillRect(0,0,width,height)
+        ctx.drawImage(img,0,0,width,height)
+        if(text){
+          ctx.font="16px Arial";
+          ctx.textBaseline="middle";
+          ctx.fillStyle="rgba(255,255,255,0.75)";
+          ctx.fillRect(0,0,ctx.measureText(text).width+8,28);
+          ctx.fillStyle="#000000";
+          ctx.fillText(text,4,14);
+        }
+        let buffer=ctx.getImageData(0,0,width,height).data.buffer
+        let worker=new Worker(worker1src)
+        worker.postMessage({
+          buffer1:buffer,
+          buffer2:arr.buffer,
+          offset:4,
+          mode:mode
+        },[buffer])
+        worker.onmessage=e=>{
+          let imgdata=new ImageData(new Uint8ClampedArray(e.data.buffer),width,height)
+          
+          imgdata.data[0]=imgdata.data[0]&248|0
+          imgdata.data[1]=imgdata.data[1]&248|3
+          imgdata.data[2]=imgdata.data[2]&248|mode
+          
+          ctx.putImageData(imgdata,0,0)
+          cvs.toBlob(returnfunc)
+        }
+      }
+      //返回true或false
+      //回调获得Uint8Array
+      let detank=(img,returnfunc)=>{
+        let cvs=document.createElement("canvas")
+        let ctx=cvs.getContext("2d")
+        cvs.width=img.width
+        cvs.height=img.height
+        ctx.drawImage(img,0,0)
+        let arr=ctx.getImageData(0,0,cvs.width,cvs.height).data
+        if((arr[2]&7)==0||(arr[1]&7)!=3||(arr[0]&7)!=0){
+          return false
+        }
+        let mode=arr[2]&7
+        let worker=new Worker(worker2src)
+        worker.postMessage({
+          buffer:arr.buffer,
+          offset:4,
+          mode:mode
+        },[arr.buffer])
+        worker.onmessage=e=>{
+          returnfunc(new Uint8Array(e.data.buffer))
+        }
+        return true
+      }
+      try{
+        new Worker(worker1src)
+      }catch(e){
+        alert("你的浏览器不支持Web Worker,因此可能无法使用此程序")
+      }
+    </script>
+    <script>
+      let utf8Encode=string=>{
+        var utftext = "";
+        for (var n = 0; n < string.length; n++) {
+          var c = string.charCodeAt(n);
+          if (c < 128) {
+            utftext += String.fromCharCode(c);
+          } else if ((c > 127) && (c < 2048)) {
+            utftext += String.fromCharCode((c >> 6) | 192);
+            utftext += String.fromCharCode((c & 63) | 128);
+          } else {
+            utftext += String.fromCharCode((c >> 12) | 224);
+            utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+            utftext += String.fromCharCode((c & 63) | 128);
+          }
+        }
+        return utftext;
+      }
+
+      let utf8Decode=inputStr=>{
+        var outputStr = "";
+        var code1, code2, code3, code4;
+        for (var i = 0; i < inputStr.length; i++) {
+          code1 = inputStr.charCodeAt(i);
+          if (code1 < 128) {
+            outputStr += String.fromCharCode(code1);
+          } else if (code1 < 224) {
+            code2 = inputStr.charCodeAt(++i);
+            outputStr += String.fromCharCode(((code1 & 31) << 6) | (code2 & 63));
+          } else if (code1 < 240) {
+            code2 = inputStr.charCodeAt(++i);
+            code3 = inputStr.charCodeAt(++i);
+            outputStr += String.fromCharCode(((code1 & 15) << 12) | ((code2 & 63) << 6) | (code3 & 63));
+          } else {
+            code2 = inputStr.charCodeAt(++i);
+            code3 = inputStr.charCodeAt(++i);
+            code4 = inputStr.charCodeAt(++i);
+            outputStr += String.fromCharCode(((code1 & 7) << 18) | ((code2 & 63) << 12) | ((code3 & 63) << 6) | (code2 & 63));
+          }
+        }
+        return outputStr;
+      }
+    </script>
+    <script>
+      let readmeta=arr=>{
+        let i=0
+        while(arr[i]!=0){
+          i++
+        }
+        let meta=Array.from(arr.slice(0,i)).map(x=>String.fromCharCode(x)).join("").split(String.fromCharCode(1))
+        let length=parseInt(meta[0])
+        arr.slice(i+1,i+1+length)
+        let b=new File([arr.slice(i+1,i+1+length).buffer],utf8Decode(meta[1]),{type:meta[2]})
+        return b
+      }
+      let display2=document.getElementById("display2")
+      let info2=document.getElementById("info2")
+      let ipt2=document.getElementById("ipt2")
+      ipt2.srclist=[]
+      ipt2.onchange=()=>{
+        ipt2.srclist.map(x=>URL.revokeObjectURL(x))
+        ipt2.srclist=[]
+        display2.innerHTML=""
+        
+        let remain=ipt2.files.length
+        if(remain>0){
+          info2.innerHTML="剩余:"+remain+"&emsp;"
+        }else{
+          info2.innerHTML=""
+        }
+        Array.from(ipt2.files).map(f=>{
+          let div=document.createElement("div")
+          div.innerText="正在读取中"
+          display2.appendChild(div)
+          
+          let img=new Image()
+          img.src=URL.createObjectURL(f)
+          img.onload=()=>{
+            URL.revokeObjectURL(img.src)
+            if(!detank(img,arr=>{
+              try{
+                success(readmeta(arr))
+              }catch(e){
+                fail()
+              }
+              count()
+            })){
+              fail()
+              count()
+            }
+          }
+          let count=()=>{
+            if(--remain>0){
+              info2.innerHTML="剩余:"+remain+"&emsp;"
+            }else{
+              info2.innerHTML=""
+            }
+          }
+          let fail=()=>{
+            div.style.paddingTop="0.5rem"
+            div.innerText="图片解析失败"
+          }
+          let success=b=>{
+            let src=URL.createObjectURL(b)
+            ipt2.srclist.push(src)
+            
+            div.innerHTML=""
+            div.style.paddingTop="0.5rem"
+            
+            let div2=document.createElement("div")
+            div.appendChild(div2)
+            
+            let a=document.createElement("a")
+            a.innerText="保存"
+            a.href=src
+            a.download=b.name
+            div2.appendChild(a)
+            
+            let span=document.createElement("span")
+            span.innerText=b.name
+            span.innerHTML="&emsp;"+span.innerHTML
+            div2.appendChild(span)
+            
+            let imgbox=document.createElement("img")
+            if(b.type.indexOf("video")>=0){
+              imgbox=document.createElement("video")
+              imgbox.controls=true
+              //imgbox.setAttribute("controls","true")
+            }
+            imgbox.src=src
+            imgbox.style.maxWidth="100%"
+            div.appendChild(imgbox)
+          }
+        })
+      }
+    </script>
+    <script>
+      let stringtoarray=(str,ifzero)=>{
+        let arr=new Uint8Array(str.length+(ifzero?1:0))
+        for(let i=0;i<str.length;i++){
+          arr[i]=str.charCodeAt(i)
+        }
+        return arr
+      }
+      let concatuint8array=arrays=>{
+        let length=arrays.reduce((a,b)=>a+b.length,0)
+        let result=new Uint8Array(length)
+        let start=0
+        arrays.map(x=>{
+          result.set(x,start)
+          start+=x.length
+        })
+        return result
+      }
+      let ipt=document.getElementById("ipt")
+      
+      ipt.listx=[]
+      
+      ipt.listx.remain=0
+      ipt.onchange=()=>{
+        ipt.listx=[]
+        ipt.listx.remain=ipt.files.length
+        Array.from(ipt.files).map((f,x)=>{
+          let img=new Image()
+          img.src=URL.createObjectURL(f)
+          img.onload=()=>{
+            URL.revokeObjectURL(img.src)
+            ipt.listx[x]=img
+            ipt.listx.remain--
+          }
+        })
+      }
+      
+      let ipt1=document.getElementById("ipt1")
+      ipt1.listx=[]
+      ipt1.listx.remain=0
+      ipt1.onchange=()=>{
+        ipt1.listx=[]
+        ipt1.listx.remain=ipt1.files.length
+        Array.from(ipt1.files).map((f,x)=>{
+          let fr=new FileReader()
+          fr.readAsArrayBuffer(f)
+          fr.onload=e=>{
+            let arr=concatuint8array([stringtoarray([f.size,utf8Encode(f.name),f.type].join(String.fromCharCode(1)),true),new Uint8Array(e.target.result)])
+            ipt1.listx[x]=arr
+            ipt1.listx.remain--
+          }
+          fr.onerror=e=>{
+            ipt1.listx.remain--
+          }
+        })
+      }
+      
+      let button=document.getElementById("make")
+      button.srclist=[]
+      button.onclick=()=>{
+        if(ipt.listx.length*ipt1.listx.length==0){
+          alert("请先选择图片")
+        }else if(ipt.listx.remain+ipt1.listx.remain>0){
+          alert("图片未加载完")
+        }else{
+          make()
+        }
+      }
+      let display1=document.getElementById("display1")
+      let info1=document.getElementById("info1")
+      let make=()=>{
+        display1.innerHTML=""
+        button.srclist.map(x=>URL.revokeObjectURL(x))
+        button.srclist=[]
+        
+        let mode=parseInt(document.getElementById("bit").value)
+        let text=document.getElementById("text").value
+        let remain=ipt1.listx.length
+        let count=x=>{
+          if(x==0){
+            info1.innerHTML=""
+          }else{
+            info1.innerText="剩余:"+x
+          }
+        }
+        count(remain)
+        
+        ipt1.listx.map((arr,x)=>{
+          if(!arr){
+            count(--remain)
+            return
+          }
+          let div=document.createElement("div")
+          div.innerHTML="正在生成中"
+          display1.appendChild(div)
+          entank({
+            img:ipt.listx[x%ipt.listx.length],
+            arr:arr,
+            mode:mode,
+            text:text
+          },b=>{
+            count(--remain)
+            
+            div.innerHTML=""
+            div.style.paddingTop="0.5rem"
+          
+            let src=URL.createObjectURL(b)
+            button.srclist.push(src)
+            
+            let imgbox=document.createElement("img")
+            imgbox.src=src
+            imgbox.style.maxWidth="100%"
+            div.appendChild(imgbox)
+          })
+        })
+      }
+    </script>
+  </body>
+</html>
