@@ -12,3 +12,4 @@ var _hmt = _hmt || [];
 - [图片文件夹](tpwjj.html)
 - [无影坦克](wytk.html)
 - [随机背景+毒鸡汤](djt.html)
+- [核心价值观编码器](core-values-encoder)
