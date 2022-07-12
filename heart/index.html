@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>You are scored on my heart</title>
+    <style type="text/css">
+        /* emotion_heart.css */
+        .container {
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ff8f8e;
+        }
+
+        #expression {
+            display: block;
+            margin: 10% 16px 8px;
+            color: #f1ebe5;
+            font-size: 28px;
+            text-indent: 2em;
+            word-break: break-all;
+            text-shadow: 0 6px 4px #4a4a4a, 0px 0px 1px #000;
+            font-weight: bold;
+        }
+
+        #heartbeat {
+            display: block;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #heartbeat .heart {
+            position: absolute;
+            z-index: 2;
+            background: linear-gradient(-90deg, #F50A45 0%, #d5093c 40%);
+            animation: heartbeat 0.7s ease 0s infinite normal;
+        }
+
+        #heartbeat .heart.center {
+            background: linear-gradient(-45deg, #B80734 0%, #d5093c 40%);
+        }
+
+        #heartbeat .sided {
+            top: 100px;
+            width: 220px;
+            height: 220px;
+            border-radius: 110px;
+        }
+
+        #heartbeat .center {
+            width: 210px;
+            height: 210px;
+            bottom: 100px;
+            left: 145px;
+            transform: rotateZ(225deg);
+        }
+
+        #heartbeat .left {
+            left: 62px;
+        }
+
+        #heartbeat .right {
+            right: 62px;
+        }
+
+        #operate {
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        #operate .btn {
+            color: #f1ebe5;
+            border-color: #e26262;
+            background-color: #f37676;
+            outline: none;
+            margin: 8px;
+            padding: 6px 12px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        #operate .btn:active {
+            background-color: #cc0738;
+            box-shadow: none;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1) rotate(225deg);
+                box-shadow: 0 0 40px #d5093c;
+            }
+
+            50% {
+                transform: scale(1.1) rotate(225deg);
+                box-shadow: 0 0 70px #d5093c;
+            }
+
+            100% {
+                transform: scale(1) rotate(225deg);
+                box-shadow: 0 0 40px #d5093c;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #expression {
+                font-size: 18px;
+                margin-top: 20%;
+            }
+
+            #heartbeat {
+                width: 300px;
+                height: 300px;
+            }
+
+            #heartbeat .sided {
+                top: 60px;
+                width: 140px;
+                height: 140px;
+                border-radius: 110px;
+            }
+
+            #heartbeat .center {
+                width: 130px;
+                height: 130px;
+                bottom: 60px;
+                left: 85px;
+                transform: rotateZ(225deg);
+            }
+
+            #heartbeat .left {
+                left: 42px;
+            }
+
+            #heartbeat .right {
+                right: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="heartbeat">
+            <div class="heart left sided top"></div>
+            <div class="heart center"></div>
+            <div class="heart right sided"></div>
+        </div>
+        <div id="expression">
+            <p>心，若没有栖息的地方，到哪里都是流浪。——三毛</p>
+        </div>
+        <div id="operate">
+            <button class="btn up">上一句</button>
+            <button class="btn rand">随机一句</button>
+            <button class="btn down">下一句</button>
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script language="JavaScript" type="text/javascript">
+        // 打字机效果
+        function autowrite(el, time, repeat) {
+            var str = el.innerHTML.trim(); //返回被选 元素的内容
+            var index = 0;
+            time = time || 150;
+            el.innerHTML = '&ensp;';
+            var timer = setInterval(function () {
+                //substr(index, 1) 方法在字符串中抽取从index下标开始的一个的字符
+                var current = str.substr(index, 1);
+                if (current == '<') { //indexOf() 方法返回">"在字符串中首次出现的位置。
+                    index = str.indexOf('>', index) + 1;
+                } else {
+                    index++;
+                }
+                //substring() 方法用于提取字符串中介于两个指定下标之间的字符
+                el.innerHTML = (str.substring(0, index) + (index & 1 ? '_' : ''));
+                repeat && index > str.length + 10 && (index = 0);
+                if (index >= str.length) {
+                    var last_str = el.innerHTML;
+                    // 如果最后一个是_，则去掉
+                    if (last_str.substring(last_str.length - 1, last_str.length) == '_') {
+                        el.innerHTML = (last_str.substring(0, last_str.length - 1));
+                    }
+                    repeat || clearInterval(timer);
+                }
+            }, time);
+            return timer;
+        };
+        var index = Math.random() * words.length | 0;
+        var autowritetimer = 0;
+        var exp = document.querySelector("#expression");
+        var btnup = document.querySelector("#operate .up");
+        var btndown = document.querySelector("#operate .down");
+        var btnrand = document.querySelector("#operate .rand");
+        function update() {
+            clearInterval(autowritetimer);
+            exp.innerHTML = words[index];
+            autowritetimer = autowrite(exp);
+            console.log(index, words.length)
+        }
+        btnrand.onclick = function (e) {
+            index = Math.random() * words.length | 0;
+            update()
+        }
+        btnup.onclick = function (e) {
+            index = index == 0 ? words.length - 1 : index - 1;
+            update()
+        }
+        btndown.onclick = function (e) {
+            index = index == words.length - 1 ? 0 : index + 1;
+            update()
+        }
+        update()
+    </script>
+</body>
+</html>
