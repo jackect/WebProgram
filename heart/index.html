@@ -20,6 +20,7 @@
             margin: 80px 16px 8px;
             color: #f1ebe5;
             font-size: 28px;
+            line-height: 38px;
             text-indent: 2em;
             word-break: break-all;
             text-shadow: 0 6px 4px #4a4a4a, 0px 0px 1px #000;
@@ -109,6 +110,7 @@
         @media (max-width: 768px) {
             #expression {
                 font-size: 18px;
+                line-height: 25px;
                 margin-top: 20%;
             }
 
@@ -165,7 +167,7 @@
             var str = el.innerHTML.trim(); //返回被选 元素的内容
             var index = 0;
             time = time || 150;
-            el.innerHTML = '&ensp;';
+            el.innerHTML = '_';
             var timer = setInterval(function () {
                 //substr(index, 1) 方法在字符串中抽取从index下标开始的一个的字符
                 var current = str.substr(index, 1);
