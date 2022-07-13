@@ -194,23 +194,25 @@
         var btnup = document.querySelector("#operate .up");
         var btndown = document.querySelector("#operate .down");
         var btnrand = document.querySelector("#operate .rand");
+        var au = new Audio('bg.mp3');
         function update() {
             clearInterval(autowritetimer);
             exp.innerHTML = words[index];
             autowritetimer = autowrite(exp);
-            console.log(index, words.length)
+            console.log(index, words.length);
         }
         btnrand.onclick = function (e) {
+            au.paused && (au.loop=true) && au.play();
             index = Math.random() * words.length | 0;
-            update()
+            update();
         }
         btnup.onclick = function (e) {
             index = index == 0 ? words.length - 1 : index - 1;
-            update()
+            update();
         }
         btndown.onclick = function (e) {
             index = index == words.length - 1 ? 0 : index + 1;
-            update()
+            update();
         }
         update()
     </script>
