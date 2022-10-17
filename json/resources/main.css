@@ -1,0 +1,49 @@
+.toast {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    animation-name: showToast;
+    animation-duration: 2s;
+    box-shadow: 3px 3px 3px #adadad;
+    border-radius: 4px;
+    max-width: 40%;
+    text-align: center;
+    font-family: sans-serif;
+    color: #fff;
+    background: rgba(0, 0, 0, 72);
+    background-color: #3883fa;
+}
+
+.toast>p {
+    margin: 0;
+    padding: 0;
+}
+
+
+@keyframes showToast {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+        z-index: 999
+    }
+
+    50% {
+        opacity: 1;
+        z-index: 999
+    }
+
+    75% {
+        opacity: 1;
+        z-index: 999
+    }
+
+    100% {
+        opacity: 0;
+        z-index: 0
+    }
+}
