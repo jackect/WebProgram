@@ -17,3 +17,5 @@ var _hmt = _hmt || [];
 - [LZW 压缩解压](lzw.html)
 - [Heart](heart)
 - [JSONEditor](json)
+- [无头浏览器检测](detect-headless.html)
+
