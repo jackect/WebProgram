@@ -651,13 +651,13 @@ document.getElementById("back").onclick = function() {
 };
 document.getElementById("ok").onclick = function() {
 	document.getElementById("selectbox").style.display = "none";
-	var ro = document.getElementById("selectbox").getElementsByTagName("input");
-	othe.aiSide = ro[0].checked?-1:1;
-	for (var i = 2; i < ro.length; i++)
+	othe.aiSide = parseInt(document.querySelector('#selectbox [name=side]:checked').value);
+	var ro = document.querySelectorAll("#selectbox [name=level]");
+	for (var i = 0; i < ro.length; i++)
 		if (ro[i].checked)
 			break;
-	ai.calculateTime = [20,100,500,2000,5000,10000,20000][i-2];
-	ai.outcomeDepth = [7,10,13,14,15,16,17][i-2];
+	ai.calculateTime = [20,100,500,2000,5000,10000,20000][i];
+	ai.outcomeDepth = [7,10,13,14,15,16,17][i];
 	othe.play();
 };
 document.getElementById("cancel").onclick = function() {

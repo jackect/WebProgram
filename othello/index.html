@@ -288,8 +288,10 @@ h3 {
 		<div id="pass"></div>
 		<div id="airuning">AI运算中……</div>
 		<div id="selectbox">
-			<label><input type="radio" name="side" checked="checked"><span>玩家先走</span></label>
-			<label><input type="radio" name="side"><span>电脑先走</span></label><br />
+			<label><input type="radio" name="side" value=-1 checked="checked"><span>玩家先走</span></label>
+			<label><input type="radio" name="side" value=1><span>电脑先走</span></label><br />
+			<label><input type="radio" name="side" value=0><span>玩家对弈</span></label>
+			<label><input type="radio" name="side" value=2><span>电脑对弈</span></label><br />
 			<label><input type="radio" name="level" checked="checked"><span>难度一 每次计算 0.02 秒</span></label><br />
 			<label><input type="radio" name="level"><span>难度二 每次计算 0.1 秒</span></label><br />
 			<label><input type="radio" name="level"><span>难度三 每次计算 0.5 秒</span></label><br />
