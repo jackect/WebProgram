@@ -1,0 +1,140 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>2048</title>
+    <meta name="description" content="Join the numbers and get to the 2048 tile!">
+    <link rel="preload" as="script" href="index.js">
+    <link href="style/fonts/clear-sans.css" rel="stylesheet">
+    <link href="style/main.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
+    <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"
+        media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport"
+        content="width=device-width,target-densitydpi=160dpi,initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no">
+    <meta property="og:title" content="2048">
+    <meta property="og:site_name" content="2048">
+    <meta property="og:description"
+        content="Join the numbers and get to the 2048 tile! Careful: this game is extremely addictive!">
+    <meta property="og:image" content="meta/og_image.png">
+    <meta name="twitter:card" content="app">
+    <meta name="twitter:site" content="@gabrielecirulli">
+    <meta name="twitter:title" content="2048">
+    <meta name="twitter:description"
+        content="Join the numbers and get to the 2048 tile! Careful: this game is extremely addictive!">
+    <meta name="twitter:image" content="meta/og_image.png">
+    <meta name="twitter:url" content="http://gabrielecirulli.github.io/2048/">
+    <meta name="twitter:app:country" content="US">
+    <meta name="twitter:app:name:iphone" content="2048">
+    <meta name="twitter:app:id:iphone" content="868076805">
+    <meta name="twitter:app:url:iphone" content="https://itunes.apple.com/us/app/2048-by-gabriele-cirulli/id868076805">
+    <meta name="twitter:app:name:ipad" content="2048">
+    <meta name="twitter:app:id:ipad" content="868076805">
+    <meta name="twitter:app:url:ipad" content="https://itunes.apple.com/us/app/2048-by-gabriele-cirulli/id868076805">
+    <meta name="twitter:app:name:googleplay" content="2048">
+    <meta name="twitter:app:id:googleplay" content="com.gabrielecirulli.app2048">
+    <meta name="twitter:app:url:googleplay"
+        content="https://play.google.com/store/apps/details?id=com.gabrielecirulli.app2048">
+    <link rel="canonical" href="https://play2048.co/">
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1 class="title">2048</h1>
+            <div class="scores-container">
+                <div class="score-container">0</div>
+                <div class="best-container">0</div>
+            </div>
+        </div>
+        <div class="above-game">
+            <p class="game-intro">Join the tiles, get to <strong>2048!</strong><br><a href="javascript:void(0)"
+                    class="how-to-play-link">How to play →</a></p><a class="restart-button">New Game</a>
+        </div>
+        <div class="game-container">
+            <div class="game-message">
+                <p></p>
+                <div class="lower"><a class="keep-playing-button">Keep going</a>
+                    <a class="retry-button">Try again</a></div>
+            </div>
+            <div class="grid-container">
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+            </div>
+            <div class="tile-container">
+            </div>
+        </div>
+        <hr>
+        <div class="above-game"><a class="restart-button" id="save">Save Game</a><a class="restart-button" id="read">Read Game</a></div>
+        <p class="game-explanation"><strong class="important">How to play:</strong>
+            <span class="game-explanation-mouse">Use your <strong>arrow keys</strong></span><span
+                class="game-explanation-touch">Swipe with <strong>your fingers</strong></span>
+            to move the tiles. Tiles with the same number
+            <strong>merge into one</strong> when they touch. Add them up to reach
+            <strong>2048!</strong><br><a href="javascript:void(0)" class="start-playing-link">Start playing →</a>
+            <a class="feedback-button"
+                href="mailto:me+f@gabrielecirulli.com?body=Please%20add%20the%20%F0%9F%8D%95%20emoji%20to%20the%20subject%20to%20help%20me%20sort%20legitimate%20email%20from%20spam."
+                target="_blank" rel="noopener noreferrer">Send Feedback</a></p>
+        <hr>
+        <p>You’re playing the <strong>original version of 2048.</strong> Try out
+            the official apps for
+            <a href="https://itunes.apple.com/us/app/2048-by-gabriele-cirulli/id868076805" target="_blank">iOS</a>
+            and
+            <a href="https://play.google.com/store/apps/details?id=com.gabrielecirulli.app2048"
+                target="_blank">Android!</a>
+            All other versions of this game are derivatives and should be used with
+            caution.</p>
+        <hr>
+        <p>Created by
+            <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a>
+            Based on
+            <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio.</a></p>
+        <div class="sharing">
+            <form class="pp-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank"><input
+                    type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="NVNPJLTBZ8AME">
+                <button name="submit">
+                    <img src="meta/icon_pp.svg" width="20" height="20">Donate</button>
+            </form><span class="btc-donate"><a href="bitcoin:1Ec6onfsQmoP9kkL3zkpB6c5sA4PVcXU2i"><img
+                        src="meta/icon_bitcoin.svg" width="20" height="20">Donate BTC</a>
+                <span class="address"><code>1Ec6onfsQmoP9kkL3zkpB6c5sA4PVcXU2i</code></span></span>
+        </div>
+        <footer class="links"><a href="#" target="" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="https://poki.com/en/g/2048" target="_blank" rel="noopener noreferrer">Play 2048 on Poki</a>
+        </footer>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -16,8 +16,8 @@ var _hmt = _hmt || [];
 - [光遇生高测量](sky-height)
 - [LZW 压缩解压](lzw.html)
 - [Heart](heart)
-- [JSONEditor](json)
+- [JSONEditor](json-editor)
 - [无头浏览器检测](detect-headless.html)
 - [黑白棋](othello)
-- [2048](2048)
+- [2048](origin-2048)
   
