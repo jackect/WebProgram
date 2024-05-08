@@ -18,4 +18,6 @@ var _hmt = _hmt || [];
 - [Heart](heart)
 - [JSONEditor](json)
 - [无头浏览器检测](detect-headless.html)
-
+- [黑白棋](othello)
+- [2048](2048)
+  
