@@ -49,7 +49,9 @@ input[type=text]::-moz-placeholder, input[type=email]::-moz-placeholder {
 input[type=text]:-ms-input-placeholder, input[type=email]:-ms-input-placeholder {
   color: #9d948c;
 }
-
+.heading {
+  margin-bottom: 10px;
+}
 .heading:after {
   content: "";
   display: block;
@@ -772,9 +774,6 @@ hr {
     margin-top: 0;
     padding: 15px 10px;
     min-width: 40px;
-  }
-  .heading {
-    margin-bottom: 10px;
   }
   .game-intro {
     display: block;
