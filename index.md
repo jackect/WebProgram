@@ -20,4 +20,4 @@ var _hmt = _hmt || [];
 - [无头浏览器检测](detect-headless.html)
 - [黑白棋](othello)
 - [2048](origin-2048)
-  
+- [象棋小巫师](xqwlight)
