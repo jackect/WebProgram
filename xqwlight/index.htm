@@ -204,7 +204,7 @@ function main() {
       selMoveList.add(createOption(text, value, true));
     }
     selMoveList.scrollTop = selMoveList.scrollHeight;
-    localStorage.setItem("pos",board.pos.toFen())
+    setTimeout(()=>localStorage.setItem("pos",board.pos.toFen()),400);
   };
 }
 
