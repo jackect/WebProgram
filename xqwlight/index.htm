@@ -184,14 +184,14 @@ var board;
 
 function main() {
   board = new Board(container, "images/", "sounds/");
-  var pos=localStorage.getItem("pos");
+  var pos = localStorage.getItem("pos");
   if(pos){
     board.pos.fromFen(pos);
+    board.computer = 1-board.pos.sdPlayer;
     board.flushBoard();
   }
   board.setSearch(16);
   board.millis = 10;
-  board.computer = 1;
   board.onAddMove = function() {
     var counter = (board.pos.mvList.length >> 1);
     var space = (counter > 99 ? "    " : "   ");
@@ -204,7 +204,6 @@ function main() {
       selMoveList.add(createOption(text, value, true));
     }
     selMoveList.scrollTop = selMoveList.scrollHeight;
-    setTimeout(()=>localStorage.setItem("pos",board.pos.toFen()),400);
   };
 }
 

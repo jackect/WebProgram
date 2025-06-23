@@ -326,7 +326,8 @@ Board.prototype.response = function() {
   setTimeout(function() {
     this_.addMove(board.search.searchMain(LIMIT_DEPTH, board.millis), true);
     this_.thinking.style.visibility = "hidden";
-    console.log('KNPS:',this_.search.getKNPS());
+    console.log('KNPS:', this_.search.getKNPS());
+    setTimeout(()=>localStorage.setItem("pos", this_.pos.toFen()), 400);
   }, 250);
 }
 
@@ -406,8 +407,8 @@ Board.prototype.hint = function() {
   }
   var hintMove = this.search.searchMain(LIMIT_DEPTH, this.millis);
   if (hintMove > 0) {
-    var sqSrc = this.flipped(SRC(hintMove));
-    var sqDst = this.flipped(DST(hintMove));
+    var sqSrc = SRC(hintMove);
+    var sqDst = DST(hintMove);
     var this_ = this;
     var blinkCount = 0;
     var maxBlinks = 6;
