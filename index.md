@@ -21,3 +21,5 @@ var _hmt = _hmt || [];
 - [黑白棋](othello)
 - [2048](origin-2048)
 - [象棋小巫师](xqwlight)
+- [抖音表情包](emoji/emoji.html)
+- [抖音表情包(旧版)](emoji/emoji-old.html)
