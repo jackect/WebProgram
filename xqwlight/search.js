@@ -424,9 +424,9 @@ Search.prototype.searchMain = function(depth, millis) {
   this.mvResult = 0;
   this.allNodes = 0;
   this.pos.distance = 0;
-  var t = new Date().getTime();
-  for (var i = 1; i <= depth; i ++) {
-    var vl = this.searchRoot(i);
+  var i,vl,t = new Date().getTime();
+  for (i = 1; i <= depth; i ++) {
+    vl = this.searchRoot(i);
     this.allMillis = new Date().getTime() - t;
     if (this.allMillis > millis) {
       break;
@@ -438,6 +438,7 @@ Search.prototype.searchMain = function(depth, millis) {
       break;
     }
   }
+  this.info = 'Depth: ' + i + ' Score: ' + vl + ' Knps: ' + (0|this.getKNPS())
   return this.mvResult;
 }
 

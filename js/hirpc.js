@@ -1,5 +1,5 @@
 class HiRpc {
-    LOGTAG = '[x] HiRpc:';
+    LOGTAG = '[*] HiRpc:';
     INTERVAL = 10000;
     constructor(wsurl) {
         if (!wsurl) {
@@ -70,13 +70,13 @@ class HiRpc {
             return;
         }
         try {
-            result = act.apply(null, parm) || null;
+            result = act.apply(null, parm);
         } catch (e) {
             this.send({ id, error: { code: -32001, message: e.toString() } });
             return;
         }
         if (HiRpc.isPromise(result)) {
-            result.then(x => this.send({ id, result: x || null }))
+            result.then(x => this.send({ id, result: x }))
                 .catch(x => this.send({ id, error: { code: -32002, message: x.toString() } }));
         } else {
             this.send({ id, result });

@@ -219,6 +219,7 @@ function restart_click() {
 }
 
 function retract_click() {
+  if (board.busy) return;
   for (var i = board.pos.mvList.length; i < selMoveList.options.length; i ++) {
     board.pos.makeMove(parseInt(selMoveList.options[i].value));
   }
